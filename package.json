@@ -4,13 +4,20 @@
   "description": "Test helper for sequelize-to-json-schema",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raisely/sequelize-to-json-schema-tester.git"
   },
-  "author": "Raisely <engineering@raisely.com> (https://github.com/raisely)",
+  "author": "Agency Ventures",
+  "contributors": [
+    {
+      "name": "Chris Jensen",
+      "email": "chris@agency.sc"
+    }
+  ],
   "license": "JWL",
   "bugs": {
     "url": "https://github.com/raisely/sequelize-to-json-schema-tester/issues"
@@ -32,6 +39,6 @@
     "mocha": "^5.1.0"
   },
   "peerDependencies": {
-    "sequelize-to-json-schema": "^0.1.1"
+    "sequelize-to-json-schema": "^0.2.1"
   }
 }
