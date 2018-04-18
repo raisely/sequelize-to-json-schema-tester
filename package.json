@@ -1,0 +1,36 @@
+{
+  "name": "sequelize-to-json-schema-tester",
+  "version": "1.0.0",
+  "description": "Test helper for sequelize-to-json-schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raisely/sequelize-to-json-schema-tester.git"
+  },
+  "author": "Raisely <engineering@raisely.com> (https://github.com/raisely)",
+  "license": "JWL",
+  "bugs": {
+    "url": "https://github.com/raisely/sequelize-to-json-schema-tester/issues"
+  },
+  "homepage": "https://github.com/raisely/sequelize-to-json-schema-tester#readme",
+  "dependencies": {
+    "chai-shallow-deep-equal": "^1.4.6",
+    "chai-subset": "^1.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.0",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "mocha": "^5.1.0"
+  },
+  "peerDependencies": {
+    "sequelize": "^3.31.2",
+    "sequelize-to-json-schema": "^0.1.1"
+  }
+}
