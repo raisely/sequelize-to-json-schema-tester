@@ -1,6 +1,6 @@
 {
   "name": "sequelize-to-json-schema-tester",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Test helper for sequelize-to-json-schema",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/raisely/sequelize-to-json-schema-tester#readme",
   "dependencies": {
+    "chai": "^4.1.2",
     "chai-shallow-deep-equal": "^1.4.6",
-    "chai-subset": "^1.6.0"
+    "chai-subset": "^1.6.0",
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.0",
@@ -30,7 +32,6 @@
     "mocha": "^5.1.0"
   },
   "peerDependencies": {
-    "sequelize": "^3.31.2",
     "sequelize-to-json-schema": "^0.1.1"
   }
 }
