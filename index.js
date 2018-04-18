@@ -1,5 +1,4 @@
 const SchemaFactory = require('sequelize-to-json-schema');
-const { SequelizeSchema } = SchemaFactory;
 
 const _ = require('lodash');
 const chai = require('chai');
@@ -8,6 +7,7 @@ const shallowDeepEqual = require('chai-shallow-deep-equal');
 
 chai.use(shallowDeepEqual);
 
+const { SequelizeSchema } = SchemaFactory;
 const expect = chai.expect;
 
 /**
