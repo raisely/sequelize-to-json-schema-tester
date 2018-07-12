@@ -142,27 +142,61 @@ class SchemaHelper {
 	  * @param {HttpResponse} response The response object (must contain body)
 	  * @param {String[]} fields optional list of attributes that each property must have
 	  */
-	// eslint-disable-next-line class-methods-use-this
 	assertAllPropertiesDescribed(response, fields) {
 		// eslint-disable-next-line no-param-reassign
 		if (!fields) fields = ['description', 'examples', 'type', 'title', '$id'];
 
-		const missing = {};
-
-		_.forEach(response.body.properties, (prop, key) => {
-			const isAssociaton = prop.$ref ||
-				(prop.type === 'object' && this.model.associations[key]);
-
-			// Ignore associations
-			if (!isAssociaton) {
-				const missingKeys = _.difference(fields, Object.keys(prop));
-				if (missingKeys.length) missing[key] = missingKeys;
-			}
-		});
+		const missing = this.checkProperties(response.body, fields, this.model);
 
 		if (Object.keys(missing).length) {
 			expect({}, 'Properties are not fully described, see diff for missing properties').to.equal(missing);
 		}
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	checkProperties(schema, fields, model) {
+		const missing = {};
+
+		_.forEach(schema.properties, (prop, key) => {
+			let fieldsNeeded = fields;
+			if (prop.type === 'array' && model.associations[key]) {
+				fieldsNeeded = ['$id', 'title', 'items'];
+				const missingKeys = this.checkProperties(prop.items,
+					fields, model.associations[key]);
+
+				if (Object.keys(missingKeys).length) {
+					missing[key] = {
+						items: missingKeys,
+					};
+				}
+			}
+
+			const isReference = prop.$ref;
+				// (prop.type === 'object' && model.associations[key]);
+
+			if (prop.type === 'object' && model.associations[key]) {
+				fieldsNeeded = ['$id', 'title', 'properties'];
+				const missingKeys = this.checkProperties(prop,
+					fields, model.associations[key]);
+
+				if (Object.keys(missingKeys).length) {
+					missing[key] = {
+						properties: missingKeys,
+					};
+				}
+			}
+
+			// Ignore associations
+			if (!isReference) {
+				const missingKeys = _.difference(fieldsNeeded, Object.keys(prop));
+				if (missingKeys.length) {
+					if (!missing[key]) missing[key] = {};
+					missing[key].requiredAttributes = missingKeys;
+				}
+			}
+		});
+
+		return missing;
 	}
 
 	static getTestHelper(model, options) {
