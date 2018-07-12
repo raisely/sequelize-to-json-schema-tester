@@ -81,15 +81,16 @@ describe('assertAllPropertiesDescribed', () => {
 			}).to.throw('Properties are not fully described');
 		});
 	});
-	describe('inline array', () => {
+	describe('array', () => {
 		const scoreSchema = {
 			scores: {
 				type: 'array',
 				title: 'Scores',
+				$id: '/properties/scores',
 			},
 		};
 
-		it('permits complete', () => {
+		it('permits inline', () => {
 			const schema = Object.assign({}, scoreSchema);
 			schema.scores.items = {
 				properties: {
@@ -98,7 +99,7 @@ describe('assertAllPropertiesDescribed', () => {
 						$id: '/properties/scores/properties/highScore',
 						examples: ['12'],
 						title: 'Highest score',
-						description: 'Highet score',
+						description: 'Highest score',
 					},
 				},
 			};
@@ -115,7 +116,7 @@ describe('assertAllPropertiesDescribed', () => {
 		});
 		it('throws on incomplete', () => {
 			const schema = Object.assign({}, scoreSchema);
-			schema.scores.items = {
+			schema.scores.items.properties = {
 				highScore: {
 				},
 			};
