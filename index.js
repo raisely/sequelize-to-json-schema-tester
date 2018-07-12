@@ -161,7 +161,7 @@ class SchemaHelper {
 		});
 
 		if (Object.keys(missing).length) {
-			expect(missing, 'Properties are not fully described, see diff for missing properties').to.equal({});
+			expect({}, 'Properties are not fully described, see diff for missing properties').to.equal(missing);
 		}
 	}
 
