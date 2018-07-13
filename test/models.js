@@ -4,7 +4,7 @@ const user = mocker('user', {
 	name: 'STRING',
 });
 
-mocker('address', {	country: 'STRING' });
+mocker('address', { country: 'STRING' });
 
 mocker('scores', { highScore: 'INTEGER' });
 
