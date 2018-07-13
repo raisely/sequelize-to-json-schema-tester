@@ -59,6 +59,20 @@ describe('assertAllPropertiesDescribed', () => {
 
 			helper.assertAllPropertiesDescribed(asResponseProperties(schema));
 		});
+		it('permits nested object', () => {
+			const schema = Object.assign({}, addressSchema);
+			schema.address.properties = {
+				building: {
+					type: 'object',
+					$id: '/properties/address/properties/building',
+					examples: [],
+					title: 'building',
+					description: 'Building number, name, unit number',
+				},
+			};
+
+			helper.assertAllPropertiesDescribed(asResponseProperties(schema));
+		});
 		it('pemits reference', () => {
 			const schema = Object.assign({}, addressSchema);
 			schema.address.properties = {
@@ -110,6 +124,23 @@ describe('assertAllPropertiesDescribed', () => {
 			const schema = Object.assign({}, scoreSchema);
 			schema.scores.items = {
 				$ref: '/schema/address',
+			};
+
+			helper.assertAllPropertiesDescribed(asResponseProperties(schema));
+		});
+		it('permits nested object', () => {
+			const schema = Object.assign({}, scoreSchema);
+			schema.scores.items = {
+				properties: {
+					winner: {
+						type: 'object',
+						properties: {},
+						$id: '/properties/scores/properties/winner',
+						examples: [],
+						title: 'Winner',
+						description: 'Winners details',
+					},
+				},
 			};
 
 			helper.assertAllPropertiesDescribed(asResponseProperties(schema));

@@ -162,7 +162,7 @@ class SchemaHelper {
 			if (prop.type === 'array' && model.associations[key]) {
 				fieldsNeeded = ['$id', 'title', 'items'];
 				const missingKeys = this.checkProperties(prop.items,
-					fields, model.associations[key]);
+					fields, model.associations[key].target);
 
 				if (Object.keys(missingKeys).length) {
 					missing[key] = {
@@ -177,7 +177,7 @@ class SchemaHelper {
 			if (prop.type === 'object' && model.associations[key]) {
 				fieldsNeeded = ['$id', 'title', 'properties'];
 				const missingKeys = this.checkProperties(prop,
-					fields, model.associations[key]);
+					fields, model.associations[key].target);
 
 				if (Object.keys(missingKeys).length) {
 					missing[key] = {
